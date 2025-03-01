@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+<div class="px-4 py-2">
+    <EditForm Model="@userAccount" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="col-span-3 grid sm:grid-cols-2 gap-3">
+                
+                <div class="col-span-full grid grid-cols-1 lg:grid-cols-3 gap-3">
+                    
+                    <!-- First Name -->
+                    <div class="flex flex-col w-full">
+                        <label for="firstName" class="input_label">First Name <span class="input_required">*</span></label>
+                        <input type="text" id="firstName" placeholder="Enter First Name" class="custom_input" @bind="@userAccount.FirstName">
+                        <ValidationMessage For="@(() => userAccount.FirstName)" class="errorText" />
+                    </div>
+
+                    <!-- Surname -->
+                    <div class="flex flex-col w-full">
+                        <label for="surname" class="input_label">Surname <span class="input_required">*</span></label>
+                        <input type="text" id="surname" placeholder="Enter Surname" class="custom_input" @bind="@userAccount.Surname">
+                        <ValidationMessage For="@(() => userAccount.Surname)" class="errorText" />
+                    </div>
+
+                    <!-- Username -->
+                    <div class="flex flex-col w-full">
+                        <label for="username" class="input_label">Username</label>
+                        <input type="text" id="username" placeholder="Enter Username" class="custom_input" @bind="@userAccount.Username">
+                        <ValidationMessage For="@(() => userAccount.Username)" class="errorText" />
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col w-full">
+                    <label for="email" class="input_label">Email</label>
+                    <input type="email" id="email" placeholder="Enter Email" class="custom_input" @bind="@userAccount.Email">
+                    <ValidationMessage For="@(() => userAccount.Email)" class="errorText" />
+                </div>
+
+                <!-- Password -->
+                <div class="flex flex-col w-full">
+                    <label for="password" class="input_label">Password</label>
+                    <input type="password" id="password" placeholder="Enter Password" class="custom_input" @bind="@userAccount.Password">
+                    <ValidationMessage For="@(() => userAccount.Password)" class="errorText" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-center gap-3 mt-4">
+            <button class="main_btn" type="submit">Save</button>
+            <button type="button" class="cancel_btn">Cancel</button>
+        </div>
+    </EditForm>
+</div>

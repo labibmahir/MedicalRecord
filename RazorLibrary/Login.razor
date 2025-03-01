@@ -1,0 +1,73 @@
+﻿@using Services
+@inject IAuthService AuthService
+<div class="bg-whiteColor py-8 px-4 border border-borderColor rounded-lg sm:px-10 w-[300px] xsm:w-[390px] sm:w-[500px] md:w-full">
+    <div class="flex justify-center -mt-9 mb-5 md:hidden">
+        <img src="_content/RazorLibrary/images/medical-record-logo.jpeg" alt="Logo"  style="height:300px;width:auto;" class="h-24 xsm:h-28 sm:h-32 text-center -mt-12 bg-whiteColor" />
+    </div>
+    <form class="space-y-6" @onsubmit="SubmitForm">
+
+        <h2 class="text-center text-3xl font-extrabold text-textColor">
+            Sign in
+
+         </h2>
+        <div class="">
+  
+            <div class="flex flex-col w-full items-start justify-start mb-2">
+                <div class="flex w-full">
+                    <div class="input_label">Username</div>
+                    <span class="input_required">*</span>
+                </div>
+                <input type="text" placeholder="Enter Username" id="username" class="custom_input" @bind="@username">
+                <span class="input_error" id="usernameError"></span>
+            </div>
+
+            <div class="flex flex-col w-full items-start justify-start mb-2 relative">
+                <div class="flex w-full">
+                    <div class="input_label">Password</div>
+                    <span class="input_required">*</span>
+                </div>
+                <div class="relative w-full">
+                    <input type="@(!showPassword ? "password" : "text")" placeholder="Enter Password" id="password"
+                           class="custom_input w-full" @bind="@password">
+                    <div class="absolute right-3 top-2.5">
+                        <i class="fa-solid text-textColor @(!showPassword ? "fa-eye" : "fa-eye-slash") cursor-pointer"
+                           title="@(!showPassword ? "Show Password" : "Hide Password")" @onclick="TogglePasswordVisibility"></i>
+                    </div>
+                </div>
+                <span class="input_error" id="passwordError">@errorMessage</span>
+            </div>
+
+        </div>
+
+        <div class="flex items-center justify-between">
+            <div class="text-sm">
+                <a href="/reset-password" class="font-medium text-primaryColor hover:text-primaryColor">
+                    Forgot password?
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <button class="w-full disabled:bg-disabledColor bg-blueColor hover:bg-blueHoverBgColor p-2 rounded text-whiteColor"
+                    onclick="validateForm()">
+                @if (isSubmitting)
+                {
+                    <span class="text-white"> Loading...</span>
+                }
+                else
+                {
+                    <span class="text-white">
+                        Log In
+                    </span>
+                }
+            </button>
+        </div>
+
+    </form>
+</div>
+
+
+@code {
+
+   
+}
