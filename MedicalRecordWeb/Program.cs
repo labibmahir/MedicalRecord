@@ -12,6 +12,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddHttpClient<LoginHttpService>();
 builder.Services.AddHttpClient<UserAccountHttpService>();
+builder.Services.AddHttpClient<IPDPatientHttpService>();
+builder.Services.AddHttpClient<OPDPatientHttpService>();
 builder.Services.AddScoped<IAuthService, WebAuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider>(sp => (WebAuthService)sp.GetRequiredService<IAuthService>());
 builder.Services.AddBlazoredLocalStorage();

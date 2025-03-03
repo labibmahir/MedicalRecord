@@ -41,11 +41,11 @@ namespace RazorLibrary
             try
             {
                 await AuthService.LoginAsync(username, password);
-                Navigation.NavigateTo("/user");
+                Navigation.NavigateTo("/ipd-patient");
             }
             catch (Exception ex)
             {
-                Navigation.NavigateTo("/user");
+                Navigation.NavigateTo("/ipd-patient");
             }
         }
 

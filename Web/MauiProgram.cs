@@ -23,11 +23,19 @@ public static class MauiProgram
      ///   builder.Services.AddHttpClient<LoginHttpService>();
         builder.Services.AddHttpClient<LoginHttpService>(client =>
         {
-            client.BaseAddress = new Uri("https://localhost:7093/api/"); // Set your API base URL
-        });
-		builder.Services.AddHttpClient<UserAccountHttpService>(client =>
+            client.BaseAddress = new Uri("https://localhost:7285/api/"); // Set your API base URL
+        });    
+		builder.Services.AddHttpClient<IPDPatientHttpService>(client =>
         {
-            client.BaseAddress = new Uri("https://localhost:7093/api/"); // Set your API base URL
+            client.BaseAddress = new Uri("https://localhost:7285/api/"); // Set your API base URL
+        });
+		builder.Services.AddHttpClient<OPDPatientHttpService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7285/api/"); // Set your API base URL
+        });
+        builder.Services.AddHttpClient<UserAccountHttpService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7285/api/"); // Set your API base URL
         });
         builder.Services.AddScoped<AuthenticationStateProvider>(sp =>
             (AuthenticationStateProvider)sp.GetRequiredService<IAuthService>());
