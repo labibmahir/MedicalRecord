@@ -196,11 +196,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/IPDPatient",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
 
-      },
+      //},
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -265,11 +265,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/OPDPatient",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
 
-      },
+      //},
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {

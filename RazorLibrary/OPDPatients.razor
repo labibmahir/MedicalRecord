@@ -1,0 +1,49 @@
+﻿ @using Microsoft.AspNetCore.Components.Forms
+@using RazorLibrary.HttpServices
+
+@inject OPDPatientHttpService OPDPatientService
+
+<h3>OPD Patient Management</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="newPatient" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="mb-3">
+            <label>Select Patient</label>
+            <select @bind="newPatient.PatientId" class="form-control">
+                @foreach (var patient in PatientIds)
+                {
+                    <option value="@patient">@patient</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add OPD Patient</button>
+    </EditForm>
+
+    <h4 class="mt-4">Existing OPD Patients</h4>
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>Patient ID</th>
+                <th>OID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var record in OPDPatientsList)
+            {
+                <tr>
+                    <td>@record.PatientId</td>
+                    <td>@record.Oid</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

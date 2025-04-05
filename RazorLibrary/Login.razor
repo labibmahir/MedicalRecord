@@ -1,73 +1,101 @@
 ﻿@using Services
 @inject IAuthService AuthService
-<div class="bg-whiteColor py-8 px-4 border border-borderColor rounded-lg sm:px-10 w-[300px] xsm:w-[390px] sm:w-[500px] md:w-full">
+@* <div class="bg-whiteColor py-8 px-4 border border-borderColor rounded-lg sm:px-10 w-[300px] xsm:w-[390px] sm:w-[500px] md:w-full">
     <div class="flex justify-center -mt-9 mb-5 md:hidden">
         <img src="_content/RazorLibrary/images/medical-record-logo.jpeg" alt="Logo"  style="height:300px;width:auto;" class="h-24 xsm:h-28 sm:h-32 text-center -mt-12 bg-whiteColor" />
-    </div>
-    <form class="space-y-6" @onsubmit="SubmitForm">
+    </div> *@
+ 
+<div class="no-scrollbar" id="loginPage">
+    <div class="backGround " style="height: 100vh">
+        <div class="container pr-sm-0 pr-sm-0">
+            <div class="row martop justify-content-center">
+                <div class="col-md-6 col-lg-6 collgmd col-sm-12 col-xxl-6  cardTop  mt-3">
+                    <div class="card w-100 mt-5 shadow-sm rounded-3 cardRound">
+                        <div class="mt-2 fs-2 fw-normal small   head text-center text-nowrap px-2">
+                            <span class="smart">Medical</span>Record
+                        </div>
+                        <div style="    width: 75%;margin: auto; margin-top:0px !important" class="card-body  mt-3 p-5 pb-0 pt-2">
 
-        <h2 class="text-center text-3xl font-extrabold text-textColor">
-            Sign in
+                        
 
-         </h2>
-        <div class="">
-  
-            <div class="flex flex-col w-full items-start justify-start mb-2">
-                <div class="flex w-full">
-                    <div class="input_label">Username</div>
-                    <span class="input_required">*</span>
-                </div>
-                <input type="text" placeholder="Enter Username" id="username" class="custom_input" @bind="@username">
-                <span class="input_error" id="usernameError"></span>
-            </div>
 
-            <div class="flex flex-col w-full items-start justify-start mb-2 relative">
-                <div class="flex w-full">
-                    <div class="input_label">Password</div>
-                    <span class="input_required">*</span>
-                </div>
-                <div class="relative w-full">
-                    <input type="@(!showPassword ? "password" : "text")" placeholder="Enter Password" id="password"
-                           class="custom_input w-full" @bind="@password">
-                    <div class="absolute right-3 top-2.5">
-                        <i class="fa-solid text-textColor @(!showPassword ? "fa-eye" : "fa-eye-slash") cursor-pointer"
-                           title="@(!showPassword ? "Show Password" : "Hide Password")" @onclick="TogglePasswordVisibility"></i>
+                            <div class="mt-3 mt-xxl-4">
+                                <form class="space-y-6" @onsubmit="SubmitForm">
+
+                                    <h2 class="text-center text-3xl font-extrabold text-textColor">
+                                        Sign in
+
+                                    </h2>
+                       
+                                    
+                                    <div class="mb-2 mt-xxl-3">
+                                        <label for="username" class="form-label mb-0 font13">Username:</label>
+                                        <input id="username" type="text" class="form-control inputuser font13 " @bind="@username" />
+                                        <div id="usernameError" class="text-danger font13"></div>
+                                    </div>
+
+                                    <div class="mb-3 position-relative">
+                                        <label style="font-size:12px" for="password" class="form-label font13 mb-0 fs-xxl-8 ">Password:</label>
+                                        <input id="password" type="password" class="form-control font13  rounded-pill shadow-none" @bind="@password" />
+                                        <div id="passwordError" class="text-danger font13"></div>
+                                        <div onclick="togglePasswordVisibility()" class="showPass" id="showEye"><i class="fas fa-eye"></i> </div>
+                                        <div onclick="togglePasswordVisibility()" class="showPass" id="hideEye"><i class="fas fa-eye-slash"></i> </div>
+
+                                    </div>
+
+
+                                    <div class="text-center mb-4 mrb13 ">
+                                        <button style="font-size:12px" type="submit" onclick="validateForm()" class="btn btn-secondary rounded-pill">
+
+                                            @if (isSubmitting)
+                                            {
+                                                <span> Loading...</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span>
+                                                    Sign In
+                                                </span>
+                                            }
+
+                                        </button>
+                                    </div>
+
+                                    <hr class="mt-0 mar2" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="mb-3 text-center helpDesk mb20">
+                            <p>Powered by the Institute for Health Measurement (IHM) Southern Africa</p>
+
+                        </div>
                     </div>
+
+
                 </div>
-                <span class="input_error" id="passwordError">@errorMessage</span>
-            </div>
-
-        </div>
-
-        <div class="flex items-center justify-between">
-            <div class="text-sm">
-                <a href="/reset-password" class="font-medium text-primaryColor hover:text-primaryColor">
-                    Forgot password?
-                </a>
+                <div class=" cardLogo position-absolute top-2 "><div class="logoImage text-center"> <img  src="_content/RazorLibrary/images/medical-record-logo.jpeg" /></div></div>
             </div>
         </div>
-
-        <div>
-            <button class="w-full disabled:bg-disabledColor bg-blueColor hover:bg-blueHoverBgColor p-2 rounded text-whiteColor"
-                    onclick="validateForm()">
-                @if (isSubmitting)
-                {
-                    <span class="text-white"> Loading...</span>
-                }
-                else
-                {
-                    <span class="text-white">
-                        Log In
-                    </span>
-                }
-            </button>
-        </div>
-
-    </form>
+    </div>
 </div>
 
 
 @code {
 
-   
+
 }
+<script>
+    $(document).ready(function () {
+
+        // Initially, hide the hideEye icon
+        $('#hideEye').hide();
+
+
+    });
+
+   
+ 
+
+
+</script>
