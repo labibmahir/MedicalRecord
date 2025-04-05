@@ -14,7 +14,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Hospital",
+      "UpstreamPathTemplate": "/getaway-api/Hospital",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -31,7 +31,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Hospital/{id}",
+      "UpstreamPathTemplate": "/getaway-api/Hospital/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -48,7 +48,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/HospitalAccess",
+      "UpstreamPathTemplate": "/getaway-api/HospitalAccess",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -65,7 +65,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/HospitalAccess/{id}",
+      "UpstreamPathTemplate": "/getaway-api/HospitalAccess/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -82,7 +82,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Patient",
+      "UpstreamPathTemplate": "/getaway-api/Patient",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -99,7 +99,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Patient/{id}",
+      "UpstreamPathTemplate": "/getaway-api/Patient/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -116,7 +116,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Service",
+      "UpstreamPathTemplate": "/getaway-api/Service",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -133,7 +133,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/Service/{id}",
+      "UpstreamPathTemplate": "/getaway-api/Service/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -150,7 +150,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/UserAccount/user",
+      "UpstreamPathTemplate": "/getaway-api/UserAccount/user",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
@@ -162,7 +162,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/UserAccount/users",
+      "UpstreamPathTemplate": "/getaway-api/UserAccount/users",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -179,7 +179,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/UserAccount/user/{id}",
+      "UpstreamPathTemplate": "/getaway-api/UserAccount/user/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -191,7 +191,7 @@
           "Port": 7093
         }
       ],
-      "UpstreamPathTemplate": "/api/UserAccount/login",
+      "UpstreamPathTemplate": "/getaway-api/UserAccount/login",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
@@ -208,7 +208,7 @@
           "Port": 7252
         }
       ],
-      "UpstreamPathTemplate": "/api/IPDPatient",
+      "UpstreamPathTemplate": "/getaway-api/IPDPatient",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -225,7 +225,7 @@
           "Port": 7252
         }
       ],
-      "UpstreamPathTemplate": "/api/IPDPatient/{id}",
+      "UpstreamPathTemplate": "/getaway-api/IPDPatient/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -243,7 +243,7 @@
           "Port": 7252
         }
       ],
-      "UpstreamPathTemplate": "/api/IPDRecord",
+      "UpstreamPathTemplate": "/getaway-api/IPDRecord",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -260,7 +260,7 @@
           "Port": 7252
         }
       ],
-      "UpstreamPathTemplate": "/api/IPDRecord/{id}",
+      "UpstreamPathTemplate": "/getaway-api/IPDRecord/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -277,7 +277,7 @@
           "Port": 7141
         }
       ],
-      "UpstreamPathTemplate": "/api/OPDPatient",
+      "UpstreamPathTemplate": "/getaway-api/OPDPatient",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -294,7 +294,7 @@
           "Port": 7141
         }
       ],
-      "UpstreamPathTemplate": "/api/OPDPatient/{id}",
+      "UpstreamPathTemplate": "/getaway-api/OPDPatient/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
@@ -311,7 +311,7 @@
           "Port": 7141
         }
       ],
-      "UpstreamPathTemplate": "/api/OPDRecord",
+      "UpstreamPathTemplate": "/getaway-api/OPDRecord",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
@@ -328,7 +328,7 @@
           "Port": 7141
         }
       ],
-      "UpstreamPathTemplate": "/api/OPDRecord/{id}",
+      "UpstreamPathTemplate": "/getaway-api/OPDRecord/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     }
 

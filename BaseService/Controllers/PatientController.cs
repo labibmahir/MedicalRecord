@@ -1,5 +1,10 @@
 ﻿using Domain.Entities;
+using Infrastructure.Commands.Patients.Create;
+using Infrastructure.Commands.Patients.Delete;
+using Infrastructure.Commands.Patients.Update;
 using Infrastructure.Contexts;
+using Infrastructure.Queries.Patients;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,55 +15,22 @@ namespace BaseService.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly DataContext _context;
-        private readonly IPDDataContext _ipd;
-        private readonly OPDDataContext _opd;
+        private readonly IMediator sender;
 
-        public PatientController(DataContext context, IPDDataContext ipd, OPDDataContext opd)
+        public PatientController(IMediator sender)
         {
-            _context = context;
-            _ipd = ipd;
-            _opd = opd;
+            this.sender = sender;
         }
 
         // POST: api/Patient
         [HttpPost]
-        public async Task<IActionResult> CreatePatient(Patient patient)
+        public async Task<IActionResult> CreatePatient(CreatePatientCommand command)
         {
             try
             {
-                Guid oid = new Guid();
+                var patient = await sender.Send(command);
 
-                patient.Oid = oid;
-                patient.IsDeleted = false;
-                patient.IsSynced = false;
-                patient.DateCreated = DateTime.UtcNow;
-                // Set additional BaseModel properties if needed (e.g., CreatedBy, CreatedIn)
-
-                _context.Patients.Add(patient);
-
-                IPDPatient ipdPatient = new IPDPatient();
-                ipdPatient.Oid = new Guid();
-                ipdPatient.PatientId = oid;
-                ipdPatient.IsDeleted = false;
-                ipdPatient.IsSynced = false;
-                ipdPatient.DateCreated = DateTime.UtcNow;
-
-                _ipd.IPDPatients.Add(ipdPatient);
-
-
-                OPDPatient oPDPatient = new OPDPatient();
-                oPDPatient.Oid = new Guid();
-                oPDPatient.PatientId = oid;
-                oPDPatient.IsDeleted = false;
-                oPDPatient.IsSynced = false;
-                oPDPatient.DateCreated = DateTime.UtcNow;
-
-                _opd.OPDPatients.Add(oPDPatient);
-
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetPatientById), new { id = patient.Oid }, patient);
+                return Ok(patient);
             }
             catch (Exception ex)
             {
@@ -72,9 +44,11 @@ namespace BaseService.Controllers
         {
             try
             {
-                var patients = await _context.Patients
-                    .Where(p => !p.IsDeleted)
-                    .ToListAsync();
+                var patients = await sender.Send(new GetAllPatientQuery());
+
+                if (patients == null || patients.Count == 0)
+                    return NotFound("No patients found.");
+
                 return Ok(patients);
             }
             catch (Exception ex)
@@ -89,13 +63,9 @@ namespace BaseService.Controllers
         {
             try
             {
-                var patient = await _context.Patients
-                    .FirstOrDefaultAsync(p => p.Oid == id && !p.IsDeleted);
-                if (patient == null)
-                {
-                    return NotFound($"Patient with ID {id} not found.");
-                }
-                return Ok(patient);
+                var patientInDb = await sender.Send(new GetPatientByIdQuery(id));
+
+                return Ok(patientInDb);
             }
             catch (Exception ex)
             {
@@ -105,33 +75,23 @@ namespace BaseService.Controllers
 
         // PUT: api/Patient/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePatient(Guid id, Patient updatedPatient)
+        public async Task<IActionResult> UpdatePatient(Guid id, UpdatePatientCommand command)
         {
             try
             {
-                if (id != updatedPatient.Oid)
+                if (id != command.oid)
                 {
                     return BadRequest("Patient ID mismatch.");
                 }
 
-                var patient = await _context.Patients
-                    .FirstOrDefaultAsync(p => p.Oid == id && !p.IsDeleted);
+                var updatedPatient = await sender.Send(command);
 
-                if (patient == null)
+                if (updatedPatient == null)
                 {
                     return NotFound($"Patient with ID {id} not found.");
                 }
 
-                // Update properties
-                patient.FirstName = updatedPatient.FirstName;
-                patient.Surname = updatedPatient.Surname;
-                patient.Age = updatedPatient.Age;
-                patient.IsSynced = updatedPatient.IsSynced;
-                patient.DateModified = DateTime.UtcNow;
-                // Update additional BaseModel properties if needed (e.g., ModifiedBy, ModifiedIn)
-
-                await _context.SaveChangesAsync();
-                return Ok(patient);
+                return Ok(updatedPatient); // Return the updated patient
             }
             catch (Exception ex)
             {
@@ -145,19 +105,12 @@ namespace BaseService.Controllers
         {
             try
             {
-                var patient = await _context.Patients
-                    .FirstOrDefaultAsync(p => p.Oid == id && !p.IsDeleted);
+                var deletePatient = await sender.Send(new DeletePatientCommand(id));
 
-                if (patient == null)
-                {
+                if (deletePatient == null)
                     return NotFound($"Patient with ID {id} not found.");
-                }
 
-                // Soft delete by setting IsDeleted to true
-                patient.IsDeleted = true;
-                await _context.SaveChangesAsync();
-
-                return Ok($"Patient with ID {id} has been deleted.");
+                return Ok(deletePatient); // Return the updated patient
             }
             catch (Exception ex)
             {

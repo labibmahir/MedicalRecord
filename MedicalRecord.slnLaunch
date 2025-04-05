@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "IPDService\\IPDService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "OPDService\\OPDService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "BaseService\\BaseService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ApiGetway\\ApiGetway.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
